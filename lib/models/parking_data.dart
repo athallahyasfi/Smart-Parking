@@ -7,7 +7,7 @@ class ParkingData {
 
   ParkingData({
     required this.licensePlate,
-    required this.location,
+    required this.location, 
     required this.time,
     required this.faculty,
     this.status = 'Parkir aktif',

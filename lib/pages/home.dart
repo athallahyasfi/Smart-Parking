@@ -15,14 +15,26 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
+  // Daftar lokasi parkir dan deskripsi
+  final List<Map<String, String>> locations = [
+    {'name': 'Politeknik', 'description': 'Politeknik Negeri Sriwijaya'},
+    {'name': 'Fasilkom', 'description': 'Fakultas Ilmu Komputer'},
+    {'name': 'FE', 'description': 'Fakultas Ekonomi'},
+    {'name': 'FH', 'description': 'Fakultas Hukum'},
+    {'name': 'FISIP', 'description': 'Fakultas Ilmu Sosiologi & Ilmu Politik'},
+    {'name': 'GS', 'description': 'Graha Sriwijaya'},
+    {'name': 'FT', 'description': 'Fakultas Teknik'},
+    {'name': 'Universitas', 'description': 'Universitas Sriwijaya'},
+  ];
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
-    // Handle navigation based on index if needed
+    // Tambahkan navigasi jika diperlukan
   }
 
-  void _showLocationPopup(BuildContext context, String locationName, String description) {
+  void _showLocationPopup(BuildContext context, String locationName) {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
@@ -40,31 +52,29 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      locationName,
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 8),
-                    Text(description),
-                  ],
+                child: Text(
+                  locationName,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: ElevatedButton(
-                  child: Text('Pilih Tempat'),
                   onPressed: () {
                     Navigator.pop(context);
-                    Navigator.pushNamed(context, '/findpark');
+                    // Kirim nama lokasi ke halaman parkir
+                    Navigator.pushNamed(
+                      context,
+                      '/parkslot',
+                      arguments: locationName,
+                    );
                   },
                   style: ElevatedButton.styleFrom(
-                     backgroundColor:Color(0xFF3470A2), // ganti 'primary' dengan 'backgroundColor'
-                     minimumSize: Size(double.infinity, 50),
-                     foregroundColor: Colors.white
+                    backgroundColor: Color(0xFF3470A2),
+                    minimumSize: Size(double.infinity, 50),
+                    foregroundColor: Colors.white,
                   ),
+                  child: Text('Pilih Tempat'),
                 ),
               ),
             ],
@@ -105,20 +115,20 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Stack(
         children: [
           Image.asset(
-            'assets/map.png', // Make sure you have this asset
+            'assets/map.png', // Pastikan file map ada di folder assets
             fit: BoxFit.cover,
             width: double.infinity,
             height: double.infinity,
           ),
-          // Add all location markers
-          _buildLocationMarker(context, 0.22, 0.35, 'Politeknik', 'Politeknik Negeri Sriwijaya'),
-          _buildLocationMarker(context, 0.18, 0.45, 'Fasilkom', 'Fakultas Ilmu Komputer'),
-          _buildLocationMarker(context, 0.32, 0.45, 'FE', 'Fakultas Ekonomi'),
-          _buildLocationMarker(context, 0.45, 0.4, 'Location 1', 'Description for Location 1'),
-          _buildLocationMarker(context, 0.35, 0.55, 'Location 2', 'Description for Location 2'),
-          _buildLocationMarker(context, 0.55, 0.5, 'Location 3', 'Description for Location 3'),
-          _buildLocationMarker(context, 0.75, 0.45, 'Location 4', 'Description for Location 4'),
-          _buildLocationMarker(context, 0.45, 0.7, 'Universitas', 'Universitas Sriwijaya'),
+          // Tambahkan marker lokasi dari daftar
+          for (int i = 0; i < locations.length; i++)
+            _buildLocationMarker(
+              context,
+              0.2 + (i * 0.05), // Mengatur posisi x secara dinamis
+              0.3 + (i * 0.05), // Mengatur posisi y secara dinamis
+              locations[i]['name']!,
+              locations[i]['description']!,
+            ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -143,13 +153,26 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildLocationMarker(BuildContext context, double left, double top, String name, String description) {
+  Widget _buildLocationMarker(
+      BuildContext context, double left, double top, String name, String description) {
     return Positioned(
       left: MediaQuery.of(context).size.width * left,
       top: MediaQuery.of(context).size.height * top,
       child: GestureDetector(
-        onTap: () => _showLocationPopup(context, name, description),
-        child: Icon(Icons.location_on, color: Colors.blue, size: 30),
+        onTap: () => _showLocationPopup(context, name),
+        child: Column(
+          children: [
+            Text(
+              name,
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                backgroundColor: Colors.white.withOpacity(0.7), // Membantu agar teks terbaca
+              ),
+            ),
+            Icon(Icons.location_on, color: Colors.blue, size: 30),
+          ],
+        ),
       ),
     );
   }
