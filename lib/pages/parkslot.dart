@@ -40,6 +40,10 @@ class _ParkingSlotPageState extends State<ParkingSlotPage> {
     'FISIP': {
       'left': List.generate(10, (index) => 'L-${index + 1}'),
       'right': List.generate(10, (index) => 'R-${index + 1}')
+    },
+    'GS': {
+      'left': List.generate(10, (index) => 'L-${index + 1}'),
+      'right': List.generate(10, (index) => 'R-${index + 1}')
     }
   };
 
