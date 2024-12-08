@@ -75,6 +75,14 @@ class _ParkingSlotPageState extends State<ParkingSlotPage> {
           icon: Icon(Icons.arrow_back, color: Color(0xFF3470A2)),
           onPressed: () => Navigator.pop(context),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.location_on, color: Color(0xFF3470A2)),
+            onPressed: () {
+              Navigator.pushNamed(context, '/mark');
+            },
+          ),
+        ],
       ),
       body: Container(
         color: Color(0xFFFFD358),
