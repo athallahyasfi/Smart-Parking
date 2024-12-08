@@ -15,23 +15,21 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
-  // Daftar lokasi parkir dan deskripsi
-  final List<Map<String, String>> locations = [
-    {'name': 'Politeknik', 'description': 'Politeknik Negeri Sriwijaya'},
-    {'name': 'Fasilkom', 'description': 'Fakultas Ilmu Komputer'},
-    {'name': 'FE', 'description': 'Fakultas Ekonomi'},
-    {'name': 'FH', 'description': 'Fakultas Hukum'},
-    {'name': 'FISIP', 'description': 'Fakultas Ilmu Sosiologi & Ilmu Politik'},
-    {'name': 'GS', 'description': 'Graha Sriwijaya'},
-    {'name': 'FT', 'description': 'Fakultas Teknik'},
-    {'name': 'Universitas', 'description': 'Universitas Sriwijaya'},
+  final List<Map<String, dynamic>> locations = [
+    {'name': 'Politeknik', 'description': 'Politeknik Negeri Sriwijaya', 'left': 0.22, 'top': 0.35},
+    {'name': 'Fasilkom', 'description': 'Fakultas Ilmu Komputer', 'left': 0.18, 'top': 0.45},
+    {'name': 'FE', 'description': 'Fakultas Ekonomi', 'left': 0.32, 'top': 0.45},
+    {'name': 'FH', 'description': 'Fakultas Hukum', 'left': 0.45, 'top': 0.4},
+    {'name': 'FISIP', 'description': 'Fakultas Ilmu Sosiologi & Ilmu Politik', 'left': 0.35, 'top': 0.55},
+    {'name': 'GS', 'description': 'Graha Sriwijaya', 'left': 0.55, 'top': 0.5},
+    {'name': 'FT', 'description': 'Fakultas Teknik', 'left': 0.75, 'top': 0.45},
+    {'name': 'Universitas', 'description': 'Universitas Sriwijaya', 'left': 0.45, 'top': 0.7},
   ];
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
-    // Tambahkan navigasi jika diperlukan
   }
 
   void _showLocationPopup(BuildContext context, String locationName) {
@@ -62,7 +60,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context);
-                    // Kirim nama lokasi ke halaman parkir
                     Navigator.pushNamed(
                       context,
                       '/parkslot',
@@ -115,19 +112,18 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Stack(
         children: [
           Image.asset(
-            'assets/map.png', // Pastikan file map ada di folder assets
+            'assets/map.png',
             fit: BoxFit.cover,
             width: double.infinity,
             height: double.infinity,
           ),
-          // Tambahkan marker lokasi dari daftar
-          for (int i = 0; i < locations.length; i++)
+          for (var location in locations)
             _buildLocationMarker(
               context,
-              0.2 + (i * 0.05), // Mengatur posisi x secara dinamis
-              0.3 + (i * 0.05), // Mengatur posisi y secara dinamis
-              locations[i]['name']!,
-              locations[i]['description']!,
+              location['left'],
+              location['top'],
+              location['name'],
+              location['description'],
             ),
         ],
       ),
@@ -167,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
-                backgroundColor: Colors.white.withOpacity(0.7), // Membantu agar teks terbaca
+                backgroundColor: Colors.white.withOpacity(0.7),
               ),
             ),
             Icon(Icons.location_on, color: Colors.blue, size: 30),
