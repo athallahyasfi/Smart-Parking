@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:smartpark/pages/findpark.dart';
 import 'package:smartpark/pages/firstpage.dart';
 import 'package:smartpark/pages/history.dart';
 import 'package:smartpark/pages/home.dart';
@@ -21,7 +20,6 @@ class MyApp extends StatelessWidget {
         '/home': (context) => Home(), 
         '/history' :(context) => HistoryPage(),
         '/firstpage' :(context) => FirstPage(),
-        '/findpark' :(context) => FindParkingPage(),
         '/parkslot' :(context) => ParkingSlotPage(),
         '/mark' :(context) => MarkPage(),
       },
