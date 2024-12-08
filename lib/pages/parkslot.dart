@@ -44,6 +44,10 @@ class _ParkingSlotPageState extends State<ParkingSlotPage> {
     'GS': {
       'left': List.generate(10, (index) => 'L-${index + 1}'),
       'right': List.generate(10, (index) => 'R-${index + 1}')
+    },
+    'Universitas': {
+      'left': List.generate(10, (index) => 'L-${index + 1}'),
+      'right': List.generate(10, (index) => 'R-${index + 1}')
     }
   };
 
