@@ -4,8 +4,11 @@ import 'package:smartpark/pages/history.dart';
 import 'package:smartpark/pages/home.dart';
 import 'package:smartpark/pages/mark.dart';
 import 'package:smartpark/pages/parkslot.dart';
+import 'package:smartpark/pages/profile.dart';
+import 'package:smartpark/pages/login.dart';
+
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -15,15 +18,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: FirstPage(),
+      home: const LoginPage(),
       routes: {
-        '/home': (context) => Home(), 
-        '/history' :(context) => HistoryPage(),
-        '/firstpage' :(context) => FirstPage(),
-        '/parkslot' :(context) => ParkingSlotPage(),
-        '/mark' :(context) => MarkPage(),
+        '/home': (context) => const Home(),
+        '/history': (context) => const HistoryPage(),
+        '/firstpage': (context) => const FirstPage(),
+        '/parkslot': (context) => ParkingSlotPage(),
+        '/mark': (context) => const MarkPage(),
+        '/profile': (context) => const ProfilePage(),
+        '/login': (context) => const LoginPage(),
       },
-
-    ); 
+    );
   }
 }

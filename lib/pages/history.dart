@@ -3,7 +3,7 @@ import '../models/parking_data.dart';
 import 'parkslot.dart';
 
 class HistoryPage extends StatefulWidget {
-  const HistoryPage({Key? key}) : super(key: key);
+  const HistoryPage({super.key});
 
   @override
   _HistoryPageState createState() => _HistoryPageState();
@@ -13,23 +13,7 @@ class _HistoryPageState extends State<HistoryPage> {
   int _selectedIndex = 0;
   List<ParkingData> get parkingHistory => ParkingSlotPage.parkingHistory;
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
 
-    switch (index) {
-      case 0:
-        Navigator.pushNamed(context, '/home');
-        break;
-      case 1:
-        // Already on history page
-        break;
-      case 2:
-        Navigator.pushNamed(context, '/mark');
-        break;
-    }
-  }
 
   String _formatDateTime(DateTime dateTime) {
     return "${dateTime.day}/${dateTime.month}/${dateTime.year} ${dateTime.hour}:${dateTime.minute.toString().padLeft(2, '0')}";
@@ -40,10 +24,10 @@ class _HistoryPageState extends State<HistoryPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Color(0xFF3470A2)),
+          icon: const Icon(Icons.arrow_back, color: Color(0xFF3470A2)),
           onPressed: () => Navigator.pushNamed(context, '/home'),
         ),
-        title: Text(
+        title: const Text(
           'Riwayat Parkir',
           style: TextStyle(
             color: Color(0xFF3470A2),
@@ -51,13 +35,13 @@ class _HistoryPageState extends State<HistoryPage> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Color(0xFFFFD358),
+        backgroundColor: const Color(0xFFFFD358),
         elevation: 0,
       ),
       body: Container(
-        color: Color(0xFFFFD358),
+        color: const Color(0xFFFFD358),
         child: parkingHistory.isEmpty
-            ? Center(
+            ? const Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -93,25 +77,6 @@ class _HistoryPageState extends State<HistoryPage> {
                 },
               ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Beranda',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.history),
-            label: 'Riwayat',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.location_on),
-            label: 'Lokasi',
-          ),
-        ],
-        currentIndex: 1, // History page is selected
-        selectedItemColor: Color(0xFF3470A2),
-        onTap: _onItemTapped,
-      ),
     );
   }
 
@@ -122,7 +87,7 @@ class _HistoryPageState extends State<HistoryPage> {
       case 'parkir dibatalkan':
         return Colors.red;
       case 'parkir aktif':
-        return Color(0xFF3470A2);
+        return const Color(0xFF3470A2);
       default:
         return Colors.grey;
     }
@@ -137,7 +102,7 @@ class _HistoryPageState extends State<HistoryPage> {
     required Color statusColor,
   }) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
@@ -145,12 +110,12 @@ class _HistoryPageState extends State<HistoryPage> {
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
             blurRadius: 4,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -159,14 +124,14 @@ class _HistoryPageState extends State<HistoryPage> {
               children: [
                 Text(
                   date,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     color: Color(0xFF3470A2),
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: statusColor.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
@@ -182,35 +147,35 @@ class _HistoryPageState extends State<HistoryPage> {
                 ),
               ],
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Row(
               children: [
                 Container(
-                  padding: EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: Color(0xFF3470A2).withOpacity(0.1),
+                    color: const Color(0xFF3470A2).withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Icon(
+                  child: const Icon(
                     Icons.local_parking,
                     size: 24,
                     color: Color(0xFF3470A2),
                   ),
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         faculty,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF3470A2),
                         ),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text(
                         'Lokasi: $location',
                         style: TextStyle(
@@ -218,7 +183,7 @@ class _HistoryPageState extends State<HistoryPage> {
                           color: Colors.grey[700],
                         ),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text(
                         'Plat Nomor: $licensePlate',
                         style: TextStyle(
@@ -231,28 +196,28 @@ class _HistoryPageState extends State<HistoryPage> {
                 ),
               ],
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             status.toLowerCase() == 'parkir selesai'
                 ? ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamed(context, '/parkslot');
                     },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF3470A2),
+                      foregroundColor: Colors.white,
+                      minimumSize: const Size(double.infinity, 36),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
                     child: Text(
                       'Parkir Ulang',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF3470A2),
-                      foregroundColor: Colors.white,
-                      minimumSize: Size(double.infinity, 36),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
                   )
-                : SizedBox(),
+                : const SizedBox(),
           ],
         ),
       ),

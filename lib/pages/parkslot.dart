@@ -3,7 +3,13 @@ import '../models/parking_data.dart';
 
 class ParkingSlotPage extends StatefulWidget {
   static List<ParkingData> parkingHistory = [];
-  static Map<String, Set<String>> occupiedSlots = {}; // Track slots per lokasi
+  static Map<String, Set<String>> occupiedSlots = {};
+
+  const ParkingSlotPage({super.key}); // Track slots per lokasi
+
+  static void clearParking() {
+    occupiedSlots.clear();
+  }
 
   @override
   _ParkingSlotPageState createState() => _ParkingSlotPageState();
@@ -70,14 +76,14 @@ class _ParkingSlotPageState extends State<ParkingSlotPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Slot Parkir ($_location)'),
-        backgroundColor: Color(0xFFFFD358),
+        backgroundColor: const Color(0xFFFFD358),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Color(0xFF3470A2)),
+          icon: const Icon(Icons.arrow_back, color: Color(0xFF3470A2)),
           onPressed: () => Navigator.pop(context),
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.location_on, color: Color(0xFF3470A2)),
+            icon: const Icon(Icons.location_on, color: Color(0xFF3470A2)),
             onPressed: () {
               Navigator.pushNamed(context, '/mark');
             },
@@ -85,7 +91,7 @@ class _ParkingSlotPageState extends State<ParkingSlotPage> {
         ],
       ),
       body: Container(
-        color: Color(0xFFFFD358),
+        color: const Color(0xFFFFD358),
         child: Column(
           children: [
             Expanded(
@@ -95,7 +101,7 @@ class _ParkingSlotPageState extends State<ParkingSlotPage> {
                   children: [
                     // Kolom kiri
                     Expanded(child: _buildParkingColumn(context, _leftSlots, isLeft: true)),
-                    SizedBox(width: 16), // Jalur kosong di tengah
+                    const SizedBox(width: 16), // Jalur kosong di tengah
                     Expanded(child: _buildParkingColumn(context, _rightSlots, isLeft: false)),
                   ],
                 ),
@@ -107,7 +113,7 @@ class _ParkingSlotPageState extends State<ParkingSlotPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   _buildLegendItem(Colors.yellow, 'Free Slot'),
-                  _buildLegendItem(Color(0xFF87CEFA), 'Taken Slot'),
+                  _buildLegendItem(const Color(0xFF87CEFA), 'Taken Slot'),
                 ],
               ),
             ),
@@ -130,9 +136,9 @@ class _ParkingSlotPageState extends State<ParkingSlotPage> {
             }
           },
           child: Container(
-            margin: EdgeInsets.symmetric(vertical: 4),
+            margin: const EdgeInsets.symmetric(vertical: 4),
             decoration: BoxDecoration(
-              color: isOccupied ? Color(0xFF87CEFA) : Colors.yellow,
+              color: isOccupied ? const Color(0xFF87CEFA) : Colors.yellow,
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: Colors.black),
             ),
@@ -141,7 +147,7 @@ class _ParkingSlotPageState extends State<ParkingSlotPage> {
             child: Center(
               child: Text(
                 slot,
-                style: TextStyle(fontSize: 16, color: Colors.black),
+                style: const TextStyle(fontSize: 16, color: Colors.black),
               ),
             ),
           ),
@@ -155,10 +161,10 @@ class _ParkingSlotPageState extends State<ParkingSlotPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Masukkan Plat Nomor'),
+          title: const Text('Masukkan Plat Nomor'),
           content: TextField(
             controller: _plateController,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: 'Plat Nomor',
               hintText: 'Contoh: B 1234 ABC',
               border: OutlineInputBorder(),
@@ -167,13 +173,13 @@ class _ParkingSlotPageState extends State<ParkingSlotPage> {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text('Batal'),
+              child: const Text('Batal'),
             ),
             TextButton(
               onPressed: () {
                 _confirmParking(slot);
               },
-              child: Text('Konfirmasi'),
+              child: const Text('Konfirmasi'),
             ),
           ],
         );
@@ -184,7 +190,7 @@ class _ParkingSlotPageState extends State<ParkingSlotPage> {
   void _confirmParking(String slot) {
     if (_plateController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Plat nomor harus diisi!')),
+        const SnackBar(content: Text('Plat nomor harus diisi!')),
       );
       return;
     }
@@ -211,7 +217,7 @@ class _ParkingSlotPageState extends State<ParkingSlotPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          content: Column(
+          content: const Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(Icons.check_circle, color: Colors.green, size: 50),
@@ -226,7 +232,7 @@ class _ParkingSlotPageState extends State<ParkingSlotPage> {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );
@@ -246,8 +252,8 @@ class _ParkingSlotPageState extends State<ParkingSlotPage> {
             borderRadius: BorderRadius.circular(4),
           ),
         ),
-        SizedBox(width: 8),
-        Text(label, style: TextStyle(fontSize: 12)),
+        const SizedBox(width: 8),
+        Text(label, style: const TextStyle(fontSize: 12)),
       ],
     );
   }
