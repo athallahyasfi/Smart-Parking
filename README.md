@@ -5,8 +5,8 @@ Smart Parking adalah aplikasi parkir berbasis Flutter yang dirancang untuk memud
 *Fitur Utama*
 1. Login dan Autentikasi
 - Pengguna harus login dengan nama pengguna dan sandi sebelum mengakses aplikasi.
-- Nama pengguna: palmer
-- Sandi: 1234
+- Nama pengguna: user
+- Sandi: user123
 
 2. Pemetaan Lokasi Parkir
 - Tampilkan marker pada lokasi parkir di peta.
@@ -86,7 +86,7 @@ lib/
   
 2. Nama pengguna dan sandi default adalah:
 - Nama Pengguna: user
-- Sandi: 1234
+- Sandi: user123
 
 *Anggota Kelompok*
 1. M. Archi Daffa Danendra (09031282227094)
