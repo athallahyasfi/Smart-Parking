@@ -33,7 +33,7 @@ Halaman profil menampilkan informasi:
 
 *Mekanisme Aplikasi*
 1. Login
-- Pengguna memasukkan nama pengguna dan sandi di halaman login untuk mengakses aplikasi. Nama pengguna dan sandi yang valid adalah palmer dan 1234.
+- Pengguna memasukkan nama pengguna dan sandi di halaman login untuk mengakses aplikasi. Nama pengguna dan sandi yang valid adalah user dan user123.
 
 2. Beranda (Home)
 - Tampilkan peta lokasi parkir dengan marker untuk setiap lokasi.
